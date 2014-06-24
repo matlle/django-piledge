@@ -8,7 +8,7 @@ urlpatterns = patterns('',
 
     url(r'^$', views.IndexView.as_view(), name='index'),
 
-    #url(r'^signup/$', views.SignupView.as_view(), name="accounts_signup"), 
+    #url(r'^signup/$', views.SignupView.as_view(), name="accounts_signup"),
 
     url(r'^upload/$', views.DocCreateView.as_view(), name='upload'),
 

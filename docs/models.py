@@ -12,7 +12,7 @@ class Doc(models.Model):
     doc_title = models.CharField(max_length=100)
     doc_description = models.TextField()
     doc_created_at = models.DateTimeField('Createa at', auto_now_add=True)
-    doc_file_name = models.FileField(upload_to="uploads/docs/pdf")
+    doc_file_name = models.FileField(upload_to="uploads/docs/pdf", max_length=1024)
     doc_slug = models.SlugField(
         verbose_name = _(u'Slug'),
         help_text = _(u'The unique uri component for this commentary'),
@@ -23,6 +23,7 @@ class Doc(models.Model):
     )
     doc_thumbnail = models.ImageField(
         upload_to = 'uploads/docs/pdf/',
+        max_length = 2024,
         editable=False
     )
 
@@ -50,7 +51,6 @@ def doc_post_save(sender, instance=False, **kwargs):
 
     proc = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,)
     stdout_value = proc.communicate()[0]
-
 
 post_save.connect(doc_post_save, sender=Doc)
 

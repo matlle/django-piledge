@@ -11,7 +11,7 @@
 </ul>
     
      
-     <form action="{% url 'docs:upload' %}" method="post" {% if form.is_multipart %} enctype="multipart/form-data" {% endif %}>
+     <form action="{% url 'docs:upload' %}" method="post" width="400px;"  {% if form.is_multipart %} enctype="multipart/form-data" {% endif %}>
 
     {% csrf_token %}
     
