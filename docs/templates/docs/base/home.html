@@ -1,0 +1,86 @@
+{% extends "docs/layout.html"  %}
+
+{% load staticfiles %}
+
+{% block form %}
+
+    {# {% include 'base/form.html' %} #}
+
+{% endblock %}
+
+{% block file_list %}
+
+<span style="font-size: 25px; margin-left: 25px;">Last files added</span> <br /> 
+
+<div class="span7" class="current" style="border-radius: 6px; border: 1px solid #F5F5F5;">
+     
+    {% for doc in  latest_doc_list %}
+
+        {% if doc.doc_thumbnail %}
+
+               
+              <div  class="current-avatar" style="margin-left: 15px; margin-top: 10px;"> 
+
+                  {% if doc.avatar_50x50 %} 
+                     <a href="myactivities.php?username={{ doc.author }}"><img src="{{ doc.avatar_50x50 }}" alt="Avatar" style="width: 50px; height: 50px;" /></a>
+                  {% else %}
+                     <a href="myactivities.php?username={{ doc.author_pseudo }}"><img src="{% static "docs/img/default.png" %}" alt="Avatar" style="width: 50px; height: 50px;"/></a>
+                       
+                  {% endif %}
+                        
+              <span style="float: right;"> {# {{ ago(r.file_created_at) }} #}</span> </div>
+              
+              <table>
+                 <tr>   
+                    <td>
+                    <div class="current-thumb">
+                        <span style="margin-left: 0px; margin-bottom: -80px;"> <strong> <a href="myactivities.php?username={{ doc.author }}">{{ doc.author |title }}</a> </strong> </span> <br/>
+                        <a href="{% url 'docs:detail' doc.doc_id %}"><img src="{{ doc.doc_thumbnail.url }}" alt="Document thumbnail" style="border: 1px solid #F5F5F5; width: 150px; height: 200px;" /></a> 
+                    </div>  
+                    </td>
+                    <td> 
+                        <div class="current-properties"> 
+                          <span class="current-title"> <a href="{% url 'docs:detail' doc.doc_id %}" style="color: #484a4c;">{{ doc.doc_title }}</a></span>
+                            <br /> 
+                          <p> <span class="current-descriptin">  {{ doc.doc_description }}  </span> </p>
+                          <br />
+                          <span class="cps"> {% if doc.doc_nb_comment %}  <a href="{% url 'docs:detail' doc.doc_id %}" class="lcomment">{{ doc.doc_nb_comment }} comments</a> {% else %} No comments {% endif %} -  {{ doc.file_pages_number }} pages - {{ doc.file_size }} </span>
+
+                        </div> 
+                   </td>
+                  </tr>
+              </table>
+
+               <hr/>
+
+
+
+        {% else %}
+
+
+
+                <div class="current-avatar" style="margin-left: 20px;"> Avatar <span style="float: right;"> {# {{ ago(r.file_created_at) }} #} </span> </div>
+               
+                <table>
+                    <tr>
+                        <td> <div class="current-thumb"> <img src="docs/thumbnails/no_thumb.jpg" alt="No thumbnail" style="border: 1px solid #F5F5F5; width: 150px; height: 200px;" /> </div> </td>
+                        <td>
+                            <div class="current-properties">
+                             <span class="current-title"> <a href="show.php?id={{ doc.doc_id}}" style="color: #484a4c;">{{ doc.doc_title }} </a> </span>
+                                <br />
+                            <p> <span class="current-description">  {{ doc.doc_description }}  </span> </p>
+                            <br />
+                            <span class=""> {{ doc.file_size }} </span>
+                            </div>
+                        </td>
+                     </tr>
+                </table>
+                 
+                 <hr/>
+          
+        {% endif %}
+    {% endfor %}
+  
+</div>
+
+{% endblock %}

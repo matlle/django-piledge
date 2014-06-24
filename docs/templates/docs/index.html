@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'docs/style.css' %}" />
+
+{% if latest_doc_list %}
+    <ul>
+        {% for doc in latest_doc_list %}
+            <li><a href="{% url 'docs:detail' doc.doc_id %}">{{ doc.doc_title }}</a></li>
+      {{ doc.author }} 
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No docs are available.</p>
+{% endif %}
+
+<br /><br />
+

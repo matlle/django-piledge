@@ -1,0 +1,13 @@
+<form action="{% url 'docs:upload' %}" method="post" {% if form.is_multipart %} enctype="multipart/form-data" {% endif %}>
+
+    {% csrf_token %}
+    
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+        </div>
+    {% endfor %}
+
+    <p><input type="submit" value="Upload" /></p>
+</form>

@@ -1,0 +1,30 @@
+<iframe id="viewer" src = "/oscar/Viewer.js/#../docs/unix_tutoriel.pdf" width='724' height='500' allowfullscreen webkitallowfullscreen></iframe>
+
+490e22599c41296e381ee93b7554036d
+
+sed 's/ \(#\)/\n\1/g'
+
+
+<!-- Modal -->
+
+role="button"  data-toggle="modal"
+<div id="modal" class="modal hide fade modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+               <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+               <h3 id="modalLabel">Upload a file document</h3>
+               </div>
+               <div class="modal-body">
+               
+                   <center> {% block form %} {% endblock %} </center>
+
+               </div>
+               <div class="modal-footer">
+                 
+                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                 <button  class="btn btn-primary" name="submit">Upload</button>
+                 </form>
+               </div>
+ </div>
+
+
+ if(!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email))

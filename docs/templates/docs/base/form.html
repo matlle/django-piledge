@@ -1,0 +1,9 @@
+<form enctype="multipart/form-data" method="post" action="{{ action }}" />
+  <input type="hidden" name="MAX_FILE_SIZE" value={{ maxsize }} />
+  <label for="name">Title:</label>
+  <input type="text" id="title" name="title" value="" /><br />
+  <label for="score">Descripition:</label>
+  <textarea rows="3" cols="30" id="description" name="description"/></textarea><br />
+  <label for="file">File:</label>
+  <input type="file" id="file" name="file" /><br />
+

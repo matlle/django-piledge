@@ -1,0 +1,7 @@
+<div class="opts-inbox"> 
+   <span><input type="checkbox"><a href="#">Select all</a></span>
+    <span><a href="#">Show only messages unread</a></span>
+    <span><a href="#">Delete</a></span>
+    <span><a href="#">Mark as read</a></span>
+    <span><a href="#">Mark as unread</a></span>
+</div>

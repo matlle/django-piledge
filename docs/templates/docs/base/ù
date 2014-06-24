@@ -1,0 +1,83 @@
+{% extends "layout.html"  %}
+
+{% block form %}
+
+        {% if flash %}   
+           {{ flash|raw }}
+        {% endif %}
+    
+
+    {% include 'base/form.html' %} 
+
+{% endblock %}
+
+{% block file_list %}
+
+<center> <span style="font-size: 25px; margin-right: 12px;">Last files added</span> -  <button href="#modal" role="button" class="btn btn-success"  data-toggle="modal" style="margin-left: 12px;"><i class="icon-upload"></i> Upload</button>  </center> <br /> 
+
+<div class="span7" class="current" style="border-radius: 6px; border: 1px solid #F5F5F5;">
+     
+    {% for r in row %}
+        {% if r.file_thumb_name %}
+
+               
+              <div  class="current-avatar" style="margin-left: 15px; margin-top: 10px;"> 
+
+                  {% if author.author_avatar %}
+                      {{ author.author_avatar }}
+                  {% else %}
+                      <img src="Public/img/default.png" alt="Avatar" style="width: 50px; height: 50px;"/> 
+                  {% endif %}
+
+                  <span style="margin-left: 10px; margin-bottom: 104px;">{{ author.author_pseudo }}</span>
+
+              <span style="float: right;"> {{ ago(r.file_created_at) }} </span> </div>
+              
+              <table>
+                  <tr>
+                    <td> <div class="current-thumb"> <a href="show.php?id={{ r.file_id }}"><img src="{{ r.file_thumb_name }}" alt="Document thumbnail" style="border: 1px solid #F5F5F5;" /></a> </div>  </td>
+                    <td> 
+                        <div class="current-properties"> 
+                          <span class="current-title"> <a href="show.php?id={{ r.file_id }}" style="color: #484a4c;">{{ r.file_title }}</a> </span>
+                            <br /> 
+                          <p> <span class="current-descriptin">  {{ r.file_description }}  </span> </p>
+                          <br />
+                          <span class=""> {{ r.file_pages_number }} pages - {{ r.file_size }} </span>
+                        </div> 
+                   </td>
+                  </tr>
+              </table>
+
+               <hr/>
+
+
+
+        {% else %}
+
+
+
+                <div class="current-avatar" style="margin-left: 20px;"> Avatar <span style="float: right;"> {{ ago(r.file_created_at) }} </span> </div>
+               
+                <table>
+                    <tr>
+                        <td> <div class="current-thumb"> <img src="docs/thumbnails/no_thumb.jpg" alt="No thumbnail" style="border: 1px solid #F5F5F5; width: 150px; height: 200px;" /> </div> </td>
+                        <td>
+                            <div class="current-properties">
+                             <span class="current-title"> <a href="show.php?id={{ r.file_id }}" style="color: #484a4c;"> {{ r.file_title }} </a> </span>
+                                <br />
+                            <p> <span class="current-description">  {{ r.file_description }}  </span> </p>
+                            <br />
+                            <span class=""> {{ r.file_size }} </span>
+                            </div>
+                        </td>
+                     </tr>
+                </table>
+                 
+                 <hr/>
+          
+        {% endif %}
+    {% endfor %}
+  
+</div>
+
+{% endblock %}

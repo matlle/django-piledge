@@ -1,0 +1,9 @@
+<h1>{{ doc.doc_title }}</h2>
+<h4>{{ doc.doc_description }}</h4>
+<span>{{ doc.author }}</span>
+
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+{% else %}
+    <p>Welcome, new user. Please log in.</p>
+{% endif %}
