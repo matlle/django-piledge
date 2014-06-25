@@ -45,6 +45,19 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Doc
     template_name = 'docs/file/show.html'
+    slug_field = 'doc_slug'
+    #slug_url_kwarg = "not_slug"
+
+    """def get_queryset(self, **kwargs):
+        slug = self.kwargs.get('slug') or kwargs.get('slug')
+        d = Doc.objects.get(slug=slug)
+        return Doc.objects.filter(doc_slug=slug)
+       
+        if slug:
+            return Doc.objects.filter(doc_id=slug)
+        else:
+            return Doc.objects.all()
+        """
 
 
 class DocCreateView(generic.CreateView):

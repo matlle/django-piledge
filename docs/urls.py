@@ -10,7 +10,7 @@ urlpatterns = patterns('',
 
     #url(r'^signup/$', views.SignupView.as_view(), name="accounts_signup"),
 
-    url(r'^upload/$', views.DocCreateView.as_view(), name='upload'),
+    url(r'^upload$', views.DocCreateView.as_view(), name='upload'),
 
     url(r'^(?P<slug>[\w-]+)/$', views.DetailView.as_view(), name='detail'),
 

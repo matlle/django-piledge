@@ -1,3 +1,4 @@
+{% load humanize %}
 <div class="comment-list" id="tc{{ f.file_id }}">
         {% for c in twoc %}
             {% if c.comment_content %}
@@ -8,7 +9,7 @@
                 {% endif %}
                 <strong> <a href="myactivities.php?username={{ c.author_pseudo }}" style="color: #3b5998;"> {{ c.author_pseudo }} </a> </strong>
                 <span>{{ c.comment_content }}</span> 
-                <span style="color: #aaa; float: right;">{{ ago(c.comment_created_at) }}</span>
+                <span style="color: #aaa; float: right;">{{ c.comment_created_at|naturaltime }}</span>
                 <hr/>
        
             {% endif %}
@@ -27,7 +28,7 @@
                    {% endif %}
                     <strong> <a href="myactivities.php?username?username={{ c.author_pseudo }}" style="color: #3b5998;"> {{ c.author_pseudo }} </a> </strong>
                     <span>{{ c.comment_content }}</span>
-                    <span style="color: #aaa; float: right;">{{ ago(c.comment_created_at) }}</span>
+                    <span style="color: #aaa; float: right;">{{ c.comment_created_at|naturaltime }}</span>
                     <hr/>
        
                {% endif %}

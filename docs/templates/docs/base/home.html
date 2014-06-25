@@ -1,4 +1,5 @@
 {% extends "docs/layout.html"  %}
+{% load humanize %}
 
 {% load staticfiles %}
 
@@ -28,7 +29,7 @@
                        
                   {% endif %}
                         
-              <span style="float: right;"> {# {{ ago(r.file_created_at) }} #}</span> </div>
+              <span style="float: right;"> {{ doc.doc_created_at|naturaltime }} </span> </div>
               
               <table>
                  <tr>   
@@ -40,7 +41,7 @@
                     </td>
                     <td> 
                         <div class="current-properties"> 
-                          <span class="current-title"> <a href="{% url 'docs:detail' doc.doc_id %}" style="color: #484a4c;">{{ doc.doc_title }}</a></span>
+                          <span class="current-title"> <a href="{% url 'docs:detail' doc.doc_slug %}" style="color: #484a4c;">{{ doc.doc_title }}</a></span>
                             <br /> 
                           <p> <span class="current-descriptin">  {{ doc.doc_description }}  </span> </p>
                           <br />

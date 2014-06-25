@@ -1,42 +1,33 @@
-{% extends "layout.html" %}
+{% extends "docs/layout.html" %}
+{% load humanize %}
 
-{% block title %} {{ f.file_title }} - {{ parent() }} {% endblock %}
+{% block title %} {{ doc.doc_title }} - {{ block.super }} {% endblock %}
 
-{% block form %}
-
-    {% if flash %}
-        {{ flash|raw }}
-    {% endif %}
-
-    {% include 'base/form.html' %}
-
-
-{% endblock %}
 
 {% block form_field %}
 
-{% if f.file_pdf_name %}
-    <iframe id="viewer" src = "/oscar/Viewer.js/#../{{ f.file_pdf_name }}" width='724' height='500' allowfullscreen webkitallowfullscreen></iframe>
+{% if doc.doc_file_name %}
+    <iframe id="viewer" src = "/oscar/Viewer.js/#../{{ doc.doc_file_name }}" width='724' height='500' allowfullscreen webkitallowfullscreen></iframe>
 {% else %}
-    <iframe id="viewer" src = "/oscar/Viewer.js/#../docs/{{ f.file_name }}" width='724' height='500' allowfullscreen webkitallowfullscreen></iframe>
+    <iframe id="viewer" src = "/oscar/Viewer.js/#../docs/{{ doc.doc_file_name }}" width='724' height='500' allowfullscreen webkitallowfullscreen></iframe>
 {% endif %}
 
  
   <div class="show-file-title"> 
 
-      <h3> {{ f.file_title }} </h3> 
+      <h3> {{ doc.doc_title }} </h3> 
       <span style="float: left;">
          
-         <strong> <a href="myactivities.php?username={{ f.author_pseudo }}"> {{ f.author_pseudo|title }} </a> </strong>
-         {{ ago(f.file_created_at) }}
+         <strong> <a href="myactivities.php?username={{ doc.author_pseudo }}">{{ doc.author_pseudo|title }}</a> </strong>
+         {{ doc.doc_created_at|naturaltime }}
      </span>
-      <button class="btn btn-success" style="margin-left: 470px;"><i class="icon-download"></i><a href="download.php?id={{ f.file_id }}" style="text-decoration: none;">Download</a></button>
+      <button class="btn btn-success" style="margin-left: 470px;"><i class="icon-download"></i><a href="download.php?id={{ doc.doc_id }}" style="text-decoration: none;">Download</a></button>
   <br/> 
   <div style="float: left; border-bottom: 1px solid #b5bbbf;"> 
       {% if count <= 2 %} 
           {{ count }} comments 
-     {% elseif count > 2 %} 
-          <a href="#" class="comments-list" id="{{ f.file_id }}"> View {{ scount }} more comments </a> 
+     {% elif count > 2 %} 
+          <a href="#" class="comments-list" id="{{ doc.doc_id }}"> View {{ scount }} more comments </a> 
       {% else %} 
           No comments for this document, be the first to add a comment 
       {% endif %} 
@@ -46,14 +37,16 @@
   </div>
    
    <br/>
+
  {% if author %}
     
-      {% include 'file/list_comments.html' %}
-      {% include 'file/form_comment.html' %} 
+      {% include 'docs/file/list_comments.html' %}
+      {% include 'docs/file/form_comment.html' %} 
  
  {% else %}
     <h4> You need to connect for leave a connect. <a href="login.php">Login</a> </h4>
-    {% include 'file/list_comments.html' %}
+    {% include 'docs/file/list_comments.html' %}
  {% endif %}
+
 
 {% endblock %}
