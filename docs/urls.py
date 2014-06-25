@@ -12,7 +12,7 @@ urlpatterns = patterns('',
 
     url(r'^upload/$', views.DocCreateView.as_view(), name='upload'),
 
-    url(r'^(?P<pk>\d+)/$', views.DetailView.as_view(), name='detail'),
+    url(r'^(?P<slug>[\w-]+)/$', views.DetailView.as_view(), name='detail'),
 
     url(r'^(.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )

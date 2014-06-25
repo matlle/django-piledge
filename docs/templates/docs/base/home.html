@@ -35,7 +35,7 @@
                     <td>
                     <div class="current-thumb">
                         <span style="margin-left: 0px; margin-bottom: -80px;"> <strong> <a href="myactivities.php?username={{ doc.author }}">{{ doc.author |title }}</a> </strong> </span> <br/>
-                        <a href="{% url 'docs:detail' doc.doc_id %}"><img src="{{ doc.doc_thumbnail.url }}" alt="Document thumbnail" style="border: 1px solid #F5F5F5; width: 150px; height: 200px;" /></a> 
+                        <a href="{% url 'docs:detail' doc.doc_slug %}"><img src="{{ doc.doc_thumbnail.url }}" alt="Document thumbnail" style="border: 1px solid #F5F5F5; width: 150px; height: 200px;" /></a> 
                     </div>  
                     </td>
                     <td> 
