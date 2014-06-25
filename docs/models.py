@@ -22,7 +22,7 @@ class Doc(models.Model):
         editable = False
     )
     doc_thumbnail = models.ImageField(
-        upload_to = 'uploads/docs/pdf/',
+        upload_to = 'uploads/docs/pdf/thumbnails/',
         max_length = 2024,
         editable=False
     )
@@ -35,7 +35,7 @@ class Doc(models.Model):
 
     def save(self):
         self.doc_slug = slugify(self.doc_title)
-        thumbnail = "uploads/docs/pdf/%s_%s_%s.png" % ("thumbnail",self.doc_slug, uuid.uuid1().hex,)
+        thumbnail = "uploads/docs/pdf/thumbnails/%s_%s_%s.png" % ("thumbnail",self.doc_slug, uuid.uuid1().hex,)
         self.doc_thumbnail = thumbnail
         super(Doc, self).save()
 

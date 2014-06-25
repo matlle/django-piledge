@@ -57,7 +57,7 @@ class DocCreateView(generic.CreateView):
             doc = form.save(commit=False)
             doc.author = self.request.user
             #doc.doc_slug = doc.doc_title
-            doc.save()
+            #doc.save()
         return super(DocCreateView, self).form_valid(form)
 
 
