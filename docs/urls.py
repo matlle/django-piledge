@@ -14,5 +14,9 @@ urlpatterns = patterns('',
 
     url(r'^(?P<slug>[\w-]+)/$', views.DetailView.as_view(), name='detail'),
 
+    url(r'^SignupAuthUser$', views.register, name='signup'),
+
+    url(r'^Signin$', views.signin, name='signin'),
+
     url(r'^(.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
