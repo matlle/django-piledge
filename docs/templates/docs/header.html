@@ -28,7 +28,7 @@
                                     <li ><a href="#Dashboard" >Dashboard</a></li>
                                     <li ><a href="profile.php?username={{ author.author_pseudo }}" >Profile</a></li>
                                     <li ><a href="#settings">Settings</a></li>
-                                    <li ><a href="#logout">Logout</a></li>
+                                    <li ><a href="{% url 'docs:logout' %}">Logout</a></li>
                                     </ul>
                                </div>
 
@@ -39,7 +39,7 @@
 
           {% else %}
 
-              <li style="margin-right: 200px;"><a href="{% url "accounts:account_login" %}"><strong>Login</strong></a></li>
+              <li style="margin-right: 200px;"><a href="{% url 'docs:signin' %}"><strong>Login</strong></a></li>
 
           {% endif %}
         </ul>

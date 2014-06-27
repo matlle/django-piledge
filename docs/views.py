@@ -1,12 +1,14 @@
+import datetime, random, sha
 from django.http import Http404
+from django.core.mail import send_mail
 from django.shortcuts import render_to_response, redirect, render, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
-from forms import DocForm, UserRegistrationForm
+from django.contrib.auth.decorators import login_required
+from forms import DocForm, CustomUserCreationForm
 
 from docs.models import Doc
 
@@ -54,47 +56,54 @@ class DocCreateView(generic.CreateView):
 def register(request, template_name="docs/authors/signup.html"):
     if request.method == 'POST':
         postdata = request.POST.copy()
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user.email = request.POST['email']
-            user.set_password(user.password)
-            user.save()
-            #ue = postdata.get('email', '')
-            #pw = postdata.get('password1', '')
-            new_user = authenticate(username=user.username, password=user.password)
+            ue = postdata.get('username', '')
+            pw = postdata.get('password1', '')
+            new_user = authenticate(username=ue, password=pw)
             if new_user and new_user.is_active:
                 login(request, new_user)
-                redirect_at_url = urlresolvers.reverse('index')
+                redirect_at_url = reverse('docs:index')
                 return HttpResponseRedirect(redirect_at_url)
             
 
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
+
+
+
+
 
 
 
 def signin(request):
     context = RequestContext(request)
     if request.method == 'POST':
-        un = request.POST['username']
-        up = request.POST['password']
-        user = authenticate(usernae=un, password=up)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect("/")
+                redirect_at_url = reverse('docs:index')
+                return HttpResponseRedirect(redirect_at_url)
             else:
-                return HttpResponse("You're account is disabled")
+                errors = "You're account is disabled"
         else:
-            #print "Invalid login details " + un + " " + up
-            return render_to_response('docs/authors/login.html', {}, context)
+            #print ("Invalid login details " + username + " " + password)
+            errors = 'Your username/password is incorrect'
+            return render_to_response('docs/authors/login.html', {'errors': errors}, context)
     else:
-        return render_to_response('docs/authors/login.html', {}, context)
+        return render_to_response('docs/authors/login.html', locals(), context)
 
 
-
+@login_required(login_url='docs:signin')
+def signout(request):
+    logout(request)
+    redirect_at_url = reverse('docs:index')
+    return HttpResponseRedirect(redirect_at_url)
 
 
 

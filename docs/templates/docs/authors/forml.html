@@ -44,15 +44,16 @@
                     <div id="wrapper" style="margin-top: -100px;">
                         <div id="login" class="animate form">
                  
-                             <form method="post" action="{% url 'docs:signin' %}" {% if form.is_multipart %} enctype="multipart/form-data" {% endif %}>
+                             <form action="{% url 'docs:signin' %}" method="post" {% if form.is_multipart %} enctype="multipart/form-data" {% endif %}>
                                 {% csrf_token %}
-                                {% if next %}
-                                    <input type="hidden" name="next" value="{{ next }}" />
-                                {% endif %}
 
                                 <h1>Log in</h1>
                                 {# {% if le %} {% include 'docs/authors/msgl.html' %} {% endif %} #}
-                                {{ form.errors }}
+
+                                 {% if errors %}
+                                     {{ errors }}
+                                 {% endif %}
+
                                 <p> 
                                     <label for="username" class="uname" data-icon="" >Email</label>
                                     <input id="username" name="username" required="required" type="text" placeholder="username" />
@@ -69,7 +70,8 @@
 								</p>
                                 
                                 <p class="login button"> 
-                                    <input type="submit" name="submitl" value="Login" /> 
+                                    <input type="submit" value="Login" />
+                                    <input type="hidden" name="next" value="{{ next }}" />
 								</p>
                                 <p class="change_link"> 
 									
