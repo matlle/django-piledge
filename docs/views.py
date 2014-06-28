@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from forms import DocForm, CustomUserCreationForm
@@ -76,13 +77,16 @@ def register(request, template_name="docs/authors/signup.html"):
 
 
 
-
-
 def signin(request):
     context = RequestContext(request)
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+        try:
+            User.objects.get(username=username)
+        except User.DoesNotExist:
+            errors = 'This username doesn\'t exist. Try again please'
+            return render_to_response('docs/authors/login.html', locals(), context)
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
@@ -92,9 +96,8 @@ def signin(request):
             else:
                 errors = "You're account is disabled"
         else:
-            #print ("Invalid login details " + username + " " + password)
-            errors = 'Your username/password is incorrect'
-            return render_to_response('docs/authors/login.html', {'errors': errors}, context)
+            errors = 'Your username/password is incorrect. Try again please'
+            return render_to_response('docs/authors/login.html', locals(), context)
     else:
         return render_to_response('docs/authors/login.html', locals(), context)
 

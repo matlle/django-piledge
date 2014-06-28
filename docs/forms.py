@@ -18,6 +18,7 @@ class DocForm(ModelForm):
 
 
 
+
 class UniqueUsernameField(forms.CharField):
     """
     An UserField which only is valid if no User has that email.
