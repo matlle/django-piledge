@@ -55,6 +55,9 @@ class DocCreateView(generic.CreateView):
 
 
 def register(request, template_name="docs/authors/signup.html"):
+    redirect_at_url = reverse('docs:index')
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(redirect_at_url)
     if request.method == 'POST':
         postdata = request.POST.copy()
         form = CustomUserCreationForm(request.POST)
@@ -65,10 +68,8 @@ def register(request, template_name="docs/authors/signup.html"):
             new_user = authenticate(username=ue, password=pw)
             if new_user and new_user.is_active:
                 login(request, new_user)
-                redirect_at_url = reverse('docs:index')
                 return HttpResponseRedirect(redirect_at_url)
             
-
     else:
         form = CustomUserCreationForm()
     return render_to_response(template_name, locals(), context_instance=RequestContext(request))
@@ -78,6 +79,9 @@ def register(request, template_name="docs/authors/signup.html"):
 
 
 def signin(request):
+    redirect_at_url = reverse('docs:index')
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(redirect_at_url)
     context = RequestContext(request)
     if request.method == 'POST':
         username = request.POST['username']
@@ -91,7 +95,7 @@ def signin(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                redirect_at_url = reverse('docs:index')
+                #redirect_at_url = reverse('docs:index')
                 return HttpResponseRedirect(redirect_at_url)
             else:
                 errors = "You're account is disabled"
