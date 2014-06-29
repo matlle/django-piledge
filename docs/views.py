@@ -2,6 +2,7 @@ import datetime, random, sha
 from django.http import Http404
 from django.core.mail import send_mail
 from django.shortcuts import render_to_response, redirect, render, get_object_or_404
+from django.contrib.auth.views import password_reset, password_reset_confirm
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -89,18 +90,17 @@ def signin(request):
         try:
             User.objects.get(username=username)
         except User.DoesNotExist:
-            errors = 'This username doesn\'t exist. Try again please'
+            ierrors = 'This username doesn\'t exist. Try again please'
             return render_to_response('docs/authors/login.html', locals(), context)
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                #redirect_at_url = reverse('docs:index')
                 return HttpResponseRedirect(redirect_at_url)
             else:
-                errors = "You're account is disabled"
+                ierrors = "You're account is disabled"
         else:
-            errors = 'Your username/password is incorrect. Try again please'
+            ierrors = 'Your username/password is incorrect. Try again please'
             return render_to_response('docs/authors/login.html', locals(), context)
     else:
         return render_to_response('docs/authors/login.html', locals(), context)
@@ -112,6 +112,25 @@ def signout(request):
     redirect_at_url = reverse('docs:index')
     return HttpResponseRedirect(redirect_at_url)
 
+
+
+
+def change_password(request):
+    return password_reset(request, template_name='reset.html',
+                          email_template_name='reset_email.html',
+                          subject_template_name='reset_subject.txt',
+                          post_reset_redirect=reverse('docs:success'))
+
+
+def change_password_confirm(request, uidb64=None, token=None):
+    return password_reset_confirm(request, template_name='reset_confirm.html',
+    uidb36=uidb36, token=token, post_reset_redirect=reverse('docs:success'))
+
+
+
+def success(request):
+    context = RequestContext(request)
+    return render_to_response('docs/authors/success.html', {}, context)
 
 
 

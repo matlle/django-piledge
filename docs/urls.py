@@ -20,5 +20,12 @@ urlpatterns = patterns('',
 
     url(r'^Logout$', views.signout, name='logout'),
 
+    url(r'^resetpw$', views.change_password, name='change_password'),
+
+    url(r'^resetpw/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.change_password_confirm, name='change_password_confirm'),
+
+    url(r'^success$', views.success, name='success'),
+
     url(r'^(.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )

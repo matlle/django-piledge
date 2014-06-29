@@ -49,13 +49,13 @@
 
                                 <h1>Log in</h1>
 
-                                 {% if errors %}
-                                     <center> <div style="color: red; background-color: #e8e9ea;">{{ errors }}</div> </center>
+                                 {% if ierrors %}
+                                     <center> <div style="color: red; background-color: #e8e9ea;">{{ ierrors }}</div> </center>
                                  {% endif %}
 
                                 <p> 
                                     <label for="username" class="uname" data-icon="" >Email</label>
-                                    <input id="username" name="username" required="required" type="text" value="{{ username }}" placeholder="username" />
+                                    <input id="username" name="username" required="required" type="text" value="{% if username %} {{ username }} {% endif %}" placeholder="username" />
                                 </p>
                                 <p> 
                                     <label for="password" class="youpasswd" data-icon="">Your password</label>
@@ -86,9 +86,11 @@
                              <form method="post" action="{% url 'docs:signup' %}">
                                 <h1> Sign up </h1>
                                 {% csrf_token %}                           
-                           {# {% if le is not empty %} {% include 'authors/msgr.html' %} {% endif %} #}
                                 
-                                {{ form.errors }}
+                                 {% if errors %}
+                                     <center> <div style="color: red; background-color: #e8e9ea;">{{ errors }}</div> </center>
+                                 {% endif %}
+
                                 
                                 <p> 
                                     <label for="author_pseudo" class="uname" data-icon="">Your username</label>
