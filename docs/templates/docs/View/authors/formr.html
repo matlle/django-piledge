@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<!--
+	@@ -=::MATLLE::=-
+-----------------------------------------------------------------------------	
+	# author: @matlle
+	# email: paso.175@gmail.com
+	# mobile: (225) 41870768
+-----------------------------------------------------------------------------
+	@@ Simple is better than complex.
+-->
+
+
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="UTF-8" />
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
+        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="Public/css/style3.css" />
+        <link rel="stylesheet" type="text/css" href="Public/css/css-01.css" />
+        <link rel="stylesheet" type="text/css" href="Public/css/css-02.css" />
+		<link rel="stylesheet" type="text/css" href="Public/css/animate-custom.css" />
+    </head>
+    <body>
+       
+         <div class="container">   
+            
+            <header>
+              
+            </header>
+           <h3> <a href="index.php">Logo</a></h3>
+           <div style="margin-top: 40px; width: 500px; height: 20px;"><strong>Descripytion of the website. here I will explain later why I build this website and what is his mainly goal :). Come back later to discorver the news I will add. Thanks for visit :)</strong></div>
+            <div class="span7 lh">
+ 
+                <img src="Public/img/edu.jpg" style="margin-top: 50px; border-bottom: 1px solid #F5F5F5;"/>
+                <span style="color: #ccc;"> Copyright (c) 2013 All rights reserved - Created by <a href="http://www.twitter.com/matlle">Matlle</a>  Contribute  Languages  More</span>
+
+            </div>
+
+              <section>				
+                <div id="container_demo" class="span5">
+                    
+                    <a class="hiddenanchor" id="toregister"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div id="wrapper" style="margin-top: -100px;">
+                        <div id="login" class="animate form">
+                 
+                             <form method="post" action="signup.php">
+                                <h1> Sign up </h1>
+                                 
+                                  {% if le is not empty %}  {% include 'authors/msgr.html' %} {% endif %}
+                                <p> 
+                                    <label for="author_pseudo" class="uname" data-icon="">Your username</label>
+                                    <input id="user_name" name="author_pseudo" required="required" type="text" class="form_tag" {% if pseudo %} value="{{ pseudo }}" {% else %} placeholder="pseudo" {% endif %} />
+                               </p>
+                                <p> 
+                                    <label for="author_email" class="youmail" data-icon="" > Your email</label>
+                                    <input id="user_email" name="author_email" required="required" type="email" class="form_tag" {% if email %} value="{{ email }}" {% else %} placeholder="youremail@example.com" {% endif %} /> 
+                                </p>
+                                <p> 
+                                    <label for="author_password" class="youpasswd" data-icon="" >Your password</label>
+                                    <input id="password" name="author_password" required="required" type="password" class="form_tag" placeholder="***********" />
+                                </p>
+                                <p> 
+                                    <label for="author_password_confirmation" class="youpasswd" data-icon="">Please confirm your password</label>
+                                    <input id="user_password_confirmation" name="author_password_confirmation" required="required" type="password" class="form_tag" placeholder="*********" />
+                                </p>
+                                <p class="signin button"> 
+									<input type="submit" name ="submitr" value="Sign up"/> 
+								</p>
+                                <p class="change_link">  
+									Already a member ?
+									<a href="#toregister" class="to_register"> Go and log in </a>
+								</p>
+                            </form>
+                             
+                        </div>
+                        
+                        
+                        <div id="register" class="animate form">
+                             
+                             <form method="post" action="login.php">
+                            
+                                <h1>Log in</h1>
+                                {% if msgl %} {% include 'authors/msgl.html' %} {% endif %}
+                                <p> 
+                                    <label for="author_email" class="uname" data-icon="" >Email</label>
+                                    <input id="user_email" name="author_email" required="required" type="text" placeholder="email"/>
+                                </p>
+                                <p> 
+                                    <label for="author_password" class="youpasswd" data-icon="">Password</label>
+                                    <input id="user_password" name="author_password" required="required" type="password" placeholder="password" /> 
+                                </p>
+                               
+                                <p class="keeplogin">
+									<input type="checkbox" name="user[remember_me]" id="user_remember_me" value="1" /> 
+									<label for="user_remember_me">Keep me logged in</label><br/> 
+                                    <a href="#" style="text-decoration: none">Forgot password ? </a>
+								</p>
+                                
+                                <p class="login button"> 
+                                    <input type="submit" name="submitl" value="Login" /> 
+								</p>
+                                <p class="change_link"> 
+									
+									<a href="#tologin" class="to_login">Sign up</a>
+								</p>
+                            </form>
+                        
+                        </div>
+                        
+						
+                    </div>
+                </div>  
+            <section>
+       </div> 
+    </body>
+</html>
+ 

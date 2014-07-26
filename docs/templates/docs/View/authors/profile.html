@@ -1,0 +1,257 @@
+
+{% extends 'layout.html' %}
+
+{% block left_menu %}
+
+   <div>
+       {% if not a_d.avatar_200x200 %}
+           <a href="myactivities.php?username={{ a_d.author_pseudo }}"><img src="Public/img/default.png" style="height: 200px; width: 200px"></a>
+       {% else %}
+          <a href="myactivities.php?username={{ a_d.author_pseudo }}"><img src="{{ a_d.avatar_200x200 }}" style="height: 200px; width: 200px;"></a>
+       {% endif %}
+   </div>
+
+   <div style="background-color: #f2f2f2; width: 200px;">
+       <center>
+           {{ a_d.author_pseudo|title }}
+       </center>
+   </div>
+
+{% endblock %}
+
+{% block file_list %}
+   <center style="color: gray;">Profile</center>
+   <div class="span9 user-profile">
+       
+          
+       <form class="form-horizontal" action="profile.php?username={{ a_d.author_pseudo }}" method="post" enctype="multipart/form-data" id="UploadForm2">
+           <div class="control-group">
+               <label class="control-label" for="fname">First name:</label>
+               <div class="controls">
+                   <input type="text" name="fname" id="fname" value="{{ firstName }}" placeholder="First name">
+                   
+                   {% if er_fname %} <span class="profile-er"> {{ er_fname }} </span> {% endif %}
+                   
+               </div>
+           </div>
+
+           <div class="control-group">
+               <label class="control-label" for="lname">Last name:</label>
+               <div class="controls">
+                   <input type="text" name="lname" id="lname" value="{{ lastName }}" placeholder="Last name">
+
+                   {% if er_lname %} <span class="profile-er"> {{ er_lname }} </span> {% endif %}
+                   
+               </div>
+           </div>
+
+           <div class="control-group">
+               <label class="control-label" for="lname">Gender:</label>
+               <div class="controls">
+                   
+                   <select name="gender" class="input-small">
+                       <option>Gender</option>
+                       <option>Male</option>
+                       <option>Female</option>
+                   </select>
+
+               </div>
+           </div>
+           
+           <div class="control-group">
+               <label class="control-label" for="lname">Birthday:</label>
+               <div class="controls">
+                   
+                   <select name="Year"class="input-small">
+                       <option>Year</option>
+                       <option>1999</option>
+                       <option>1998</option>
+                       <option>1997</option>
+                       <option>1996</option>
+                       <option>1995</option>
+                       <option>1994</option>
+                       <option>1993</option>
+                       <option>1992</option>
+                       <option>1991</option>
+                       <option>1989</option>
+                       <option>1988</option>
+                       <option>1987</option>
+                       <option>1986</option>
+                       <option>1985</option>
+                       <option>1984</option>
+                       <option>1983</option>
+                       <option>1982</option>
+                       <option>1981</option>
+                       <option>1980</option>
+                       <option>1979</option>
+                   </select>
+
+                   <select name="month" class="input-small">
+                       <option>Month</option>
+                       <option>January</option>
+                       <option>Febrary</option>
+                       <option>March</option>
+                       <option>April</option>
+                       <option>May</option>
+                       <option>June</option>
+                       <option>July</option>
+                       <option>August</option>
+                       <option>September</option>
+                       <option>October</option>
+                       <option>November</option>
+                       <option>December</option>
+                   </select>
+
+                   <select name="day" class="input-small">
+                       <option>Day</option>
+                       <option>1</option>
+                       <option>2</option>
+                       <option>3</option>
+                       <option>4</option>
+                       <option>5</option>
+                       <option>6</option>
+                       <option>7</option>
+                       <option>8</option>
+                       <option>9</option>
+                       <option>10</option>
+                       <option>11</option>
+                       <option>12</option>
+                       <option>13</option>
+                       <option>14</option>
+                       <option>15</option>
+                       <option>16</option>
+                       <option>17</option>
+                       <option>18</option>
+                       <option>19</option>
+                       <option>20</option>
+                       <option>21</option>
+                       <option>22</option>
+                       <option>23</option>
+                       <option>24</option>
+                       <option>25</option>
+                       <option>26</option>
+                       <option>27</option>
+                       <option>28</option>
+                       <option>29</option>
+                       <option>30</option>
+                       <option>31</option>
+                   </select>
+               </div>
+           </div>
+
+           
+
+            <div class="control-group">
+               <label class="control-label" for="lname">Bio:</label>
+               <div class="controls">
+                   <textarea id="bio" name="bio"  placeholder="Describe yourself" style="height: 100px; width: 290px;">{% if bio %}{{bio}}{% endif %}</textarea>
+                   
+                   {% if er_bio %} <span class="profile-er"> {{ er_bio }} </span> {% endif %}
+
+               </div>
+           </div>
+
+
+           
+          
+          
+          <div class="control-group">
+               <label class="control-label" for="lname">Country:</label>
+               <div class="controls">
+                   
+                   <select name="country" class="input-small">
+                       <option>Country</option>
+                       <option>Female</option>
+                   </select>
+
+               </div>
+           </div>           
+
+
+           <div class="control-group">
+               <label class="control-label" for="lname">Region:</label>
+               <div class="controls">
+                   
+                   <select name="region" class="input-small">
+                       <option>Region</option>
+                       <option>Female</option>
+                   </select>
+                   
+
+               </div>
+           </div>
+
+          
+           <div class="control-group">
+               <label class="control-label" for="lname">Profession:</label>
+               <div class="controls">
+                   
+                   <select name="profession" class="input-large">
+                       <option>Profession</option>
+                       <option>Work</option>
+                       <option>Student</option>
+                   </select>
+                   
+                   
+
+               </div>
+           </div>
+
+
+           <div class="control-group">
+               <label class="control-label" for="lname">Experience:</label>
+               <div class="controls"> 
+                   <input type="text" name="experience" id="experience" value="{{ experience }}" placeholder="Programmer, Maths, ...">
+
+                   {% if er_expe %} <span class="profile-er"> {{ er_expe }} </span> {% endif %}
+
+               </div>
+           </div>
+
+
+         <div class="controls" style="width: 400px; height: 70px; border-bottom: 1px solid #f2f2f2;">
+             <button type="submit" class="btn" name="SubmitProfile" style="margin-top: 30px; margin-left: 20px;">Save changes</button>
+         </div>
+
+           
+</form>
+
+
+
+<form class="form-horizontal" action="processupload.php" method="post" enctype="multipart/form-data" id="UploadForm">
+           <div class="control-group">
+               <label class="control-label" for="lname">Change your avatar:</label>
+               <div class="controls">
+                   <input type="file" name="ImageFile" />
+                   
+                   
+                       <button type="submit" class="btn" name="SubmitButton" id="SubmitButton">Add a new photo</button>
+                   
+
+                    <div id="progressbox"><div id="progressbar"></div ><div id="statustxt">0%</div ></div>
+                    <div id="output"></div>
+                      
+               </div>
+           </div>
+       </form> 
+
+
+       
+   </div>
+
+   
+   <div>
+      <span style="color: #ccc; float: right; margin-top: 10px; margin-bottom: 10px;"> Copyright (c) 2013 - by <a href="http://www.twitter.com"> Matlle </a>  </span>
+  </div>
+
+
+{% endblock %}
+
+
+
+
+
+{% block right_menu %} {% endblock %}
+
+{% block copyright_right %} {% endblock %}
+

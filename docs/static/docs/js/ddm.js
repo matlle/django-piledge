@@ -20,6 +20,38 @@ $(window).scroll(function() {
 
 
 $(function() {
+        var fdu = $('#form_doc_upload');
+
+        $("#id_doc_file_name").change(function(){
+            var fileName = $(this).val();
+            $.ajax({
+                type: fdu.attr('method'),
+                url: fdu.attr('action'),
+                data: fdu.serialize(),
+                context: this,
+                cache: false,
+                success: function(data){
+                    $(".preview").html(data);
+                },
+                error: function(data) {
+                    var ermsg = "Can't upload the file: "+ fileName+"<br/>Something went wrong!"
+                    $(".preview").html(ermsg);
+                }
+            });
+
+
+            /*if(fileName) {
+                alert(fileName + " was selected");
+            } else {
+                alert("no files selected");
+            }*/
+
+            return false;
+
+         });
+
+
+
         
         $('#loadingIndicator').hide();
 

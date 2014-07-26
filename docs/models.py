@@ -7,13 +7,6 @@ from django.conf import settings
 import subprocess, uuid
 
 
-class MyUser(User):
-    """
-    Check if the given username exist or not
-    """
-    def DoesNotExistUsername(self, value):
-        pass
-
 
 class Doc(models.Model):
     doc_id = models.AutoField(primary_key=True)

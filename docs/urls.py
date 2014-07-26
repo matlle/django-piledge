@@ -12,6 +12,10 @@ urlpatterns = patterns('',
 
     url(r'^upload$', views.DocCreateView.as_view(), name='upload'),
 
+    url(r'^upload_doc$', views.upload_doc, name='upload_doc'),
+
+    url(r'^doc_thumb$', views.create_doc_thumbnail, name='create_doc_thumbnail'),
+
     url(r'^(?P<slug>[\w-]+)/$', views.DetailView.as_view(), name='detail'),
 
     url(r'^SignupAuthUser$', views.register, name='signup'),

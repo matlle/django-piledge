@@ -1,0 +1,30 @@
+
+<ul class="nav nav-tabs" style="-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin-bottom: 5px; padding-bottom: 0px; height: 50px;">
+
+  <center> <li style="margin-top: 15px;"><h4>New Message</h4></li> </center>
+
+</ul>
+{% if errors %}
+   {% for er in errors %} 
+       <center> <span style="color: red; background-color: #e8e9ea;">{{ er }}</span> </center>
+   {% endfor %}
+{% endif %}
+<div class="input-prepend">
+    <form enctype="multipart/form-data"  method="post" action="nmsg.php">
+        <input type="hidden" name="ap" value="{{ author.author_pseudo }}">
+        <span class="add-on">To</span>
+        <input type="text" name="to" class="span2" id="prependedInput" placeholder="To" value="{% if to_pseudo %}{{ to_pseudo }}{% endif %}" style="height: 30px; width: 670px;"><br/><br/>
+
+        <span class="add-on">Subject</span>
+        <input type="text" name="subject" id="prependedInput" placeholder="Subject" value="{% if subject %} {{ subject }} {% else %} No subject {% endif %}" style="width: 625px;"><br/><br/>
+
+        <textarea name="content" placeholder="Write your message..." style="height: 400px; width: 685px; resize: none;">{% if content %} {{ content }} {% endif %}</textarea>
+
+       <div>
+           <button type="submit"  name="submit" class="btn" style="float: right; margin-right: 50px; width: 100px;">Send</button>
+       </div>
+
+    </form>
+</div>

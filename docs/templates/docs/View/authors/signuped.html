@@ -1,0 +1,13 @@
+
+{% extends "layout.html" %}
+
+{% block form_field %}
+
+{% if success %}
+  <p> {{ success }} </p> <br/>
+  <p> Go back to home <a href="index.php"> Home >> <a/> </p>
+{% else %}
+    {{ errors }}
+{% endif %}
+
+{% endblock %}

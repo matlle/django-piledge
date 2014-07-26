@@ -1,0 +1,52 @@
+
+
+{% extends "layout.html" %}
+
+{% block left_menu %} 
+   
+   <div class="msg_menu">
+       
+       <ul class="nav nav-list">
+
+                    <li class="nav-header">Message </li>  
+                    <li><a href="nmsg.php"><i class=""></i>News Message</a></li>
+                    <li class="active">
+                        <a href="msg.php">
+                            <i class=""></i>Inbox 
+                            <span class="badge badge-info" style="float: right;">{% if msg_unread.count > 0 %} {{ msg_unread.count }} {% endif %}</span>
+                        </a>
+                    </li>
+                    <li><a href="sent.php">Sent</a></li>
+                    <li class="nav-header">Conversations</li>
+                    <li><a href="#">Programming</a></li>
+                    <li><a href="#">Maths</a></li>
+                    <li><a href="#">Comptabilité</a></li>
+            </ul>
+
+   </div>
+
+{% endblock %}
+
+{% block file_list %}
+   <div class="span7" style="border: 1px solid #F5F5F5; width: 700px;">
+         
+     {% block msg_zone %}
+
+      {% block msg_header %}  {% include 'msg/msg_header.html'  %} {% endblock %} 
+
+         {% if not inbox %}  
+             {% include 'msg/no_element_error.html' %}
+         {% else %}
+             {% include 'msg/inbox_list.html' %}
+         {% endif %}
+
+     {% endblock %}
+    
+   </div>
+   <div style="float: left; margin-left: 280px; margin-top: 5px; margin-bottom: 5px; color: #ccc;">
+    <span style="color: #ccc;"> Copyright (c) 2013 - by <a href="http://www.twitter.com"> MATLLE </a> <a href="#"> Language </a> </span>
+   </div>
+
+{% endblock %}
+
+{% block copyright_right %} {% endblock %}

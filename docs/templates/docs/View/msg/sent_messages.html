@@ -1,0 +1,14 @@
+
+{% extends "msg/msg.html" %}
+
+{% block msg_zone %}
+
+    {% include 'msg/msg_header.html' %}
+
+    {% if not sent %}
+        {% include 'msg/no_element_error.html' %}
+    {% else %}
+        {% include 'msg/sent_list.html' %}
+    {% endif %}
+
+{% endblock %}

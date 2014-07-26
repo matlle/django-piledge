@@ -1,0 +1,63 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <ul class="nav" id="nv">
+          
+          {% if author %}
+          <!--  <li> <div class="not"> <a href="#"><img src="Public/img/53.png"></a> </div> </li>  -->        
+                <li> 
+                      <div class="mess"> <a href="msg.php" style="color:"><img src="Public/img/7.png"><span class="badge badge-info">{% if msg_unread.count  > 0 %}{{ msg_unread.count }} {% endif %}</span></a>
+                      </div> 
+                </li>
+                    
+               <li><a href="myactivities.php?username={{ author.author_pseudo }}"> 
+                   {% if not author.avatar_22x22 %}
+                       <img src="Public/img/default.png" style="height: 22px; width: 22px;" />
+                   {% else %}
+                       <img src="{{ author.avatar_22x22 }}" style="height: 22px; width: 22px;" />
+                   {% endif %}
+                   <strong> {{ author.author_pseudo }} </strong></a>
+               </li>
+            <li>
+                  <div class="dropdown">
+	           
+                                <a class="account" style="text-decoration: none;">Account</i></a>
+
+                               <div class="submenu">
+                                    <ul class="root">
+                                    <li ><a href="#Dashboard" >Dashboard</a></li>
+                                    <li ><a href="profile.php?username={{ author.author_pseudo }}" >Profile</a></li>
+                                    <li ><a href="#settings">Settings</a></li>
+                                    <li ><a href="logout.php">Logout</a></li>
+                                    </ul>
+                               </div>
+
+                  </div>     
+                                                                                                                                                 
+            </li>
+
+
+          {% else %}
+
+              <li style="margin-right: 200px;"><a href="login.php"><strong>Login</strong></a></li>
+
+          {% endif %}
+        </ul>
+         
+        <ul class="nav" id="logo">
+          <li><a href="index.php"><strong>Logo</strong></a></li>
+        </ul>
+
+        <ul class="nav" id="sefie">
+          <li>
+          
+              <div class="input-append">
+                  <form method="get" action="search.php">
+                      <input class="input-xxlarge" class="span2" id="appendedInputButtons" type="text" name="search">
+                      <button type="submit" class="btn" type="button"><i class="icon-search"></i></button>
+                 </form> 
+              </div>
+
+          </li>
+       </ul>
+     </div>
+  </div>

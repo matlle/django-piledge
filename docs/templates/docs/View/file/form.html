@@ -1,0 +1,24 @@
+
+<form class="form-horizontal" style="width: 400px; margin-left: -250px; margin-top: -100px; " enctype="multipart/form-data" method="post" action="share.php" id="formdocf">
+  <input type="hidden" name="MAX_FILE_SIZE" value="{{ maxsize }}"/>
+  <div class="control-group">
+    <label class="control-label" for="title">Title</label>
+    <div class="controls">
+      <input type="text" id="title" name="title" value="{{in}}" placeholder="Title">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="description">Description</label>
+    <div class="controls">
+      <textarea id="bio" name="description"  placeholder="Description" style="height: 100px; width: 290px;">{% if description %}{{description}}{% endif %}</textarea>
+                   
+                   {% if er_description %} <span class="profile-er"> {{ er_description }} </span> {% endif %}
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      
+      <button type="submit" class="btn">Share now</button>
+    </div>
+  </div>
+</form>

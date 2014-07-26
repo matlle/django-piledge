@@ -1,0 +1,50 @@
+
+<div>
+</div>
+<div class="msg-properties">
+    {{ msg_reading.message_created_at }}
+</div><br/><br/>
+
+<div class="msg-sender">
+    <div>
+        {% if msg_reading.author_id == author.author_id %}
+
+            {% if not msg_reading.message_receiver_avatar %}
+                <img src="Public/img/default.png" alt="Avatar" style="width: 100px; height: 100px;">
+            {% else %}
+                <img src="{{ msg_reading.message_receiver_avatar }}" alt="Avatar" style="width: 100px; height: 100px;">
+            {% endif %}
+
+        {% else %}
+
+            {% if not msg_reading.avatar_100x100 %}
+                <img src="Public/img/default.png" alt="Avatar" style="width: 100px; height: 100px;">
+            {% else %}
+                <img src="{{ msg_reading.avatar_100x100 }}" alt="Avatar" style="width: 100px; height: 100px;">
+            {% endif %}
+
+        {% endif %}
+    </div>
+    <div style="background-color: #f2f2f2"> 
+        <center> 
+            {% if msg_reading.author_id == author.author_id %} 
+                {{ msg_reading.message_receiver_pseudo }} 
+            {% else %} 
+                {{ msg_reading.author_pseudo }}
+           {% endif %}
+        </center> 
+    </div>
+</div>
+
+<div class="msg-subject">
+     <strong> <em> {{ msg_reading.message_subject }} </em> </strong>
+</div>
+
+<div class="msg-body">
+    {{ msg_reading.message_content }}        
+</div>
+
+<br/><br/>
+
+<div>  {% include 'msg/form_reply_msg.html' %} </div>
+

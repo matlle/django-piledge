@@ -1,0 +1,40 @@
+
+{% extends "layout.html" %}
+
+{% block form_field %}
+        
+    <ul class="nav nav-pills">
+  <li class="active">
+    <a href="#">Upload a document</a>
+  </li>    
+  <li><a href="#">Write a full document</a></li>
+  <li><a href="#">Write a topic</a></li>
+</ul>
+    
+      {% if formshr %} 
+          <center><span style="float: left; margin-left: 700px;">{{ formshr|raw }}</span></center> 
+      {% else %}
+          <form id="formDoc" method="post" enctype="multipart/form-data" action="processd.php" style="margin-bottom: 150px; margin-top: -50px; width: 550px;">
+        Choose a document: &nbsp;  
+        <input type="file" name="docFile" />
+        <button type="submit" class="btn" name="submitDoc" id="submitDoc">Upload</button>
+
+        <div id="docprogressbox"><div id="docprogressbar"></div ><div id="docstatustxt">0%</div ></div>
+               <!-- <div id="docoutput"></div> -->
+    </form>
+    <div id="ermsg"></div> 
+    <div id="docoutput" style="float: left; margin-left: 260px; margin-top: -100px; width: 152px; height: 202px;">
+      <!-- <img src="Public/img/default.png" style="width: 152px; height: 202px;"> -->
+    </div> 
+
+   <div class="span6 fd">
+       <div></div>
+    {# {% include 'file/form.html' %} #}
+      
+      {# {% if formshr %} {{ formshr|raw }} {% endif %} #}
+
+    </div>  
+   
+    {% endif %}
+
+{% endblock %}

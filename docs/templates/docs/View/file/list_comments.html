@@ -1,0 +1,37 @@
+
+<div class="comment-list" id="tc{{ f.file_id }}">
+        {% for c in twoc %}
+            {% if c.comment_content %}
+                {% if not c.avatar_30x30 %} 
+                    <img src="Public/img/default.png" style="width: 30px; height: 30px;">
+                {% else %}
+                   <img src="{{ c.avatar_30x30 }}" style="width: 30px; height: 30px;">
+                {% endif %}
+                <strong> <a href="myactivities.php?username={{ c.author_pseudo }}" style="color: #3b5998;"> {{ c.author_pseudo }} </a> </strong>
+                <span>{{ c.comment_content }}</span> 
+                <span style="color: #aaa; float: right;">{{ ago(c.comment_created_at) }}</span>
+                <hr/>
+       
+            {% endif %}
+         {% endfor %}
+
+    </div>
+
+    <div class="comment-list{{ f.file_id }}">
+        
+            {% for c in cdall %}
+                {% if c.comment_content %}
+                   {% if not c.avatar_30x30 %} 
+                        <img src="Public/img/default.png" style="width: 30px; height: 30px;">
+                   {% else %}
+                       <img src="{{ c.avatar_30x30 }}" style="width: 30px; height: 30px;">
+                   {% endif %}
+                    <strong> <a href="myactivities.php?username?username={{ c.author_pseudo }}" style="color: #3b5998;"> {{ c.author_pseudo }} </a> </strong>
+                    <span>{{ c.comment_content }}</span>
+                    <span style="color: #aaa; float: right;">{{ ago(c.comment_created_at) }}</span>
+                    <hr/>
+       
+               {% endif %}
+            {% endfor %}
+
+   </div>      

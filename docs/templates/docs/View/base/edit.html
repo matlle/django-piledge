@@ -1,0 +1,23 @@
+
+{% extends "layout.html" %}
+
+{% block title %} {{ parent() }} - Edit {{ file.file_name }} {% endblock %}
+
+{% block form_field %}
+
+<form enctype="multipart/form-data" method="post" action="{{ cible }}" />
+  <input type="hidden" name="id" value="{{ file.file_id }}" />
+  <input type="hidden" name="MAX_FILE_SIZE" value="{{ maxsize }}" />
+  <label for="title">Title:</label>
+  <input type="text" id="title" name="title" value="{{ file.file_title }}" /><br />
+  <label for="description">Descripition:</label>
+  <textarea rows="3" cols="30" id="description" name="description"/>{{ file.file_description }}</textarea><br />
+  <label for="file">File:</label>
+  <input type="file" id="file" name="file" value="" />
+  <input type="submit" name="edit" value="Edit"/>
+  <input type="submit" name="cancel" value="Cancel" />
+</form>
+ 
+{% endblock %}
+
+

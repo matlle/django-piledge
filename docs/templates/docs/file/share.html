@@ -11,18 +11,42 @@
 </ul>
     
      
-     <form action="{% url 'docs:upload' %}" method="post" width="400px;"  {% if form.is_multipart %} enctype="multipart/form-data" {% endif %}>
-
-    {% csrf_token %}
+     <form action="{% url 'docs:create_doc_thumbnail' %}" method="post" width="400px;" id="form_doc_upload" {% if form.is_multipart %} enctype="multipart/form-data" {% endif %}>
+         {% csrf_token %}
     
-    {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }} {{ field }}
-        </div>
-    {% endfor %}
+          <!--<form id="formDoc" method="post" enctype="multipart/form-data" action="processd.php" style="margin-bottom: 150px; margin-top: -50px; width: 550px;">
+        Choose a document: &nbsp;  
+        <input type="file" name="docFile" />
+        <button type="submit" class="btn" name="submitDoc" id="submitDoc">Upload</button>
 
-    <p><input type="submit" value="Upload" /></p>
+        <div id="docprogressbox"><div id="docprogressbar"></div ><div id="docstatustxt">0%</div ></div>
+                <div id="docoutput"></div> 
+    </form>
+    <div id="ermsg"></div> 
+    <div id="docoutput" style="float: left; margin-left: 260px; margin-top: -100px; width: 152px; height: 202px;">
+       <img src="Public/img/default.png" style="width: 152px; height: 202px;"> 
+    </div> 
+
+   <div class="span6 fd">
+       <div></div>
+    {# {% include 'file/form.html' %} #}
+      
+      {# {% if formshr %} {{ formshr|raw }} {% endif %} #}
+
+    </div>  
+    -->
+
+
+        <div class="fieldWrapper">
+            <div class="preview">
+            </div>
+            <span style="color: red;">{{ field.errors }}</span>
+            {{ form.doc_file_name }}<br/>
+            {{ form.doc_title }}
+        </div>
+        <!-- <p><input type="submit" value="Upload" /></p> -->
+   
+
 </form>
 
 

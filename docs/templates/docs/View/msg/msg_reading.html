@@ -1,0 +1,8 @@
+
+
+{% extends "msg/msg.html" %}
+
+{% block msg_zone %}
+    {% block msg_header %} {% include 'msg/msg_header_reading.html' %} {% endblock %}    
+    {% include 'msg/_reading_msg.html' %}
+{% endblock %}

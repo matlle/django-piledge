@@ -1,0 +1,9 @@
+
+
+    <form enctype="multipart/form-data" accept-charset="UTF-8" method="post" action="nmsg.php" class="form-reply-msg">
+    <input type="hidden" name="to" value="{% if msg_reading.author_id == author.author_id %}{{ msg_reading.message_receiver_pseudo }}{% else %}{{ msg_reading.author_pseudo }}{% endif %}">
+    <input type="hidden" name="subject" value="{% if msg_reading.author_id == author.author_id %}{{ msg_reading.message_subject }}{% else %}Re:{{ msg_reading.message_subject }}{% endif %}">
+    <textarea name="content" id="content-fr" placeholder="Write your reply..." rows="100" cols="50" style="margin-left: 140px; width: 500px; height: 200px; resize: none;"></textarea><br/>
+    <button type="submit" id="button-fr"  name="submit" class="btn" style="float: right; margin-right: 110px; width: 100px;">Send</a>
+    </form>
+

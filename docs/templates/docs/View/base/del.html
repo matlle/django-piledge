@@ -1,0 +1,16 @@
+
+{% extends "layout.html" %}
+
+{% block title %} {{ parent() }} - Delete file {% endblock %}
+
+{% block form %} <p>Are you sure to delete this file ? : {{ file.file_name }}</p><br />
+
+<center>
+ <form method="post" action={{ action }}>
+      <input type="hidden" name="id" value={{ file.file_id }}>
+      <input type="submit" name="yes" value="Yes">
+      <input type="submit" name="no" value="No">
+  </form>
+</center>
+
+{% endblock %}

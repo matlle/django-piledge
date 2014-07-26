@@ -1,10 +1,11 @@
 import datetime, random, sha
+import django.utils.simplejson as json
 from django.http import Http404
 from django.core.mail import send_mail
 from django.shortcuts import render_to_response, redirect, render, get_object_or_404
 from django.contrib.auth.views import password_reset, password_reset_confirm
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.contrib.auth.models import User
@@ -51,6 +52,43 @@ class DocCreateView(generic.CreateView):
 
 
 
+def update_progress_direct(request, message):
+    from django.core.cache import cache
+    try:
+        cache_key = "%s_%s" % (request['addr'], request['pid'])
+        data = cache.get(cache_key)
+        if data:
+            data['status'] = message
+            cache.set(cache_key, data)
+        else:
+            cache.set(cache_key, {
+                'length': 100,
+                'uploaded': 100,
+                'status': message
+            })
+    except:
+        pass
+
+
+
+def upload_doc(request):
+    request.upload_handlers.insert(0, ProgressBarUploadHandler())
+    return _upload_file_view(request)
+ 
+
+def create_doc_thumbnail(request):
+    if request.method == 'POST' and request.is_ajax():
+        from wand.image import Image
+        form = DocForm(request.POST)
+        titleD = request.FILE['doc_file_name']
+        msg = "Ajax works!"
+        """with Image(filename=doc_name[0]) as doc_thumb:
+            doc_thumb.save(filename="/temp.jpg")
+        with Image(filename="/temp.jpg") as doc_thumb:
+            doc_thumb.resize(200, 100)
+            doc_thumb.save(filename="/thumbnail_resize.jpg")
+        """
+    return HttpResponse(titleD)
 
 """ ========================= User Process ============================ """
 

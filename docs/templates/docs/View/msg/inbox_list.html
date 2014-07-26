@@ -1,0 +1,58 @@
+
+{% for i in inbox %}
+
+<table class="list-inbox">
+     <tr {% if not i.message_is_read %} style="background-color: #f2f2f2;" {% endif %}>
+        <td> 
+            <div>
+              <input type="checkbox">  
+                  {% if not i.avatar_50x50 %}
+                      <img src="Public/img/default.png" alt="Avatar" style="width: 50px; height: 50px;"  alt="Avatar" style="width: 50px; height: 50px;" />
+                  {% else %}
+                      <img src="{{ i.avatar_50x50 }}" alt="Avatar" style="width: 50px; height: 50px;"  alt="Avatar" style="width: 50px; height: 50px;" />
+                  {% endif %}
+               
+               <span style="margin-bottom: -80px;">
+               </span>
+
+            </div> 
+        </td>
+        <td>
+            <div style="margin-left: -2px; margin-bottom: 30px; width: 40px;">
+                <a href="myactivities.php?username={{ i.author_pseudo }}"> {{ i.author_pseudo |title }} </a>
+            </div>
+        </td>
+        <td>
+            <div style="margin-left: 40px; width: 130px;">
+              <a href="msg.php?mid={{ i.message_id }}"> <strong> {{ i.message_subject }}</strong> </a>
+            </div>
+        </td>
+        <td>
+            <div style="margin-left: 5px; width: 227px;">
+              <a href="msg.php?mid={{ i.message_id }}"> {{ i.message_content }} </a>
+            </div>
+        </td> 
+        <td>
+            <div style="margin-left: 0px; width: 20px;">
+             <a href="msg.php?mid={{ i.message_id }}"> {{ i.message_attachment }} </a>
+            </div>
+        </td>
+        <td>
+            <div style="margin-left: 5px; width: 130px;">
+               {{ i.message_created_at }}
+            </div>
+        </td>
+        <td>
+           <span style="margin-left: 0px;"><a href="#"> <img src="Public/img/warning-16.png" /> </a></span>
+           
+        </td>
+        
+
+   </tr> 
+ 
+</table>
+
+{% endfor %} 
+
+  <!--  <center><img src="Public/img/small_loader.gif" style="margin-top: 10px;"></center> -> 
+

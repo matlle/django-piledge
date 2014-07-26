@@ -1,0 +1,26 @@
+
+
+<div class="comment-form">
+
+    <a href="#">
+        {% if not author.avatar_50x50 %}
+            <img src="Public/img/default.png" style="float: left; width: 50px; height: 50px;">
+        {% else %}
+            <img src="{{ author.avatar_50x50 }}" style="float: left; width: 50px; height: 50px;">
+        {% endif %}
+     </a>
+
+   
+       <form accept-charset="UTF-8" action="{{ action }}" method="post" style="margin-right: 2px;"> 
+            <input type="hidden" name="fid" value="{{ f.file_id }}">
+            <textarea placeholder="Comment..." rows="2"  name="content" style="resize: none; width: 383px; overflow-y: hidden;"></textarea>
+
+            <div class="comment-submit-button">
+                <button type="submit" name="submit" class="btn" style="margin-left: 360px;">Comment</button>
+            </div>
+
+       </form> 
+
+
+
+</div>

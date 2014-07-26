@@ -1,33 +1,46 @@
+<!--
+	@@ -=::MATLLE::=-
+-----------------------------------------------------------------------------	
+	# author: @matlle
+	# email: paso.175@gmail.com
+	# mobile: (225) 41870768
+-----------------------------------------------------------------------------
+	@@ Simple is better than complex.
+-->
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
     <title>{% block title %} Website  {% endblock %}</title>
     <meta charset='utf-8'>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
-    
+
     {% load staticfiles %}
 
-    <link rel="stylesheet" type="text/css" href="{% static 'docs/css/custom.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'docs/css/css-01.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'docs/css/css-02.css' %}" />
+    <link href="{% static 'docs/css/custom.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'docs/css/css-01.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'docs/css/css-02.css' %}" rel="stylesheet" type="text/css" />
      
-    <link rel="stylesheet" type="text/css" href="{% static 'docs/css/style1.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'docs/css/style3.css' %}" />
+    <link href="{% static 'dos/css/style1.css' %}" rel="stylesheet" type="text/css" />
     
-    <link rel="stylesheet" type="text/css" href="{% static 'docs/css/animate-custom.css' %}" />
+    <link href="{% static 'docs/css/style3.css' %}" rel="stylesheet" type="text/css" />
     
-    <script type="text/javascript"  src="{% static 'docs/js/jsapi_google.js' %}" ></script>
+    <link href="{% static 'docs/css/animate-custom.css' %}" rel="stylesheet" type="text/css" />
+    
+    <script src="{% static 'docs/js/jsapi_google.js' %}" type="text/javascript"></script>
     <script type="text/javascript">google.load("jquery","1");google.load("jqueryui","1");</script>
     <script type="text/javascript" src="{% static 'docs/js/js01.js' %}"></script>
-    <script type="text/javascript" src="{% static 'docs/js/notice.js' %}"></script>
     <script type="text/javascript" src="{% static 'docs/js/ddm.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'docs/js/jquery.gritter.js' %}"></script>
-    <script type="text/javascript" src="{% static 'docs/js/jquery.blockui.js' %}></script>
+    <script type="text/javascript" src="{% static 'docs/Public/js/jquery.gritter.js' %}"></script>
+    <script type="text/javascript" src="{% static 'docs/Public/js/jquery.blockui.js' %}"></script>
     
  <script type="text/javascript" src="{% static 'docs/js/jquery.form.js' %}"></script>
     
- <script> 
+ <script>
+        
+        /* For user change avatar */
         $(document).ready(function() { 
 		//elements
 		var progressbox 	= $('#progressbox');
@@ -39,27 +52,27 @@
 		var completed 		= '0%';
 		
 				$(myform).ajaxForm({
-					beforeSend: function() { 
+					beforeSend: function() {
 						submitbutton.attr('disabled', '');
 						statustxt.empty();
 						progressbox.show();
-						progressbar.width(completed); 
-						statustxt.html(completed); 
-						statustxt.css('color','#000'); 
+						progressbar.width(completed);
+						statustxt.html(completed);
+						statustxt.css('color','#000');
 					},
 					uploadProgress: function(event, position, total, percentComplete) {
 						progressbar.width(percentComplete + '%')
-						statustxt.html(percentComplete + '%'); 
+						statustxt.html(percentComplete + '%');
 						if(percentComplete>50)
 							{
 								statustxt.css('color','#fff');
 							}
 						},
 					complete: function(response) {
-						output.html(response.responseText); 
-						myform.resetForm();  
-						submitbutton.removeAttr('disabled'); 
-						progressbox.hide(); 
+						output.html(response.responseText);
+						myform.resetForm();
+						submitbutton.removeAttr('disabled');
+						progressbox.hide();
 					}
 			});
         }); 
@@ -67,10 +80,8 @@
         
 
 
-
-
         
-
+        /* For upload document */
         $(document).ready(function() { 
 		//elements
 		var docprogressbox  	= $('#docprogressbox');
@@ -84,15 +95,15 @@
 	    
 
 				$(formDoc).ajaxForm({
-					beforeSend: function() { 
-						submitDoc.attr('disabled', ''); 
+					beforeSend: function() {
+						submitDoc.attr('disabled', '');
 						docstatustxt.empty();
-						docprogressbox.show(); 
+						docprogressbox.show();
 						docprogressbar.width(completed);
-						docstatustxt.html(completed); 
+						docstatustxt.html(completed);
 						docstatustxt.css('color','#000');
 					},
-					uploadProgress: function(event, position, total, percentComplete) { 
+					uploadProgress: function(event, position, total, percentComplete) {
 						docprogressbar.width(percentComplete + '%')
 						docstatustxt.html(percentComplete + '%');
 						if(percentComplete>50)
@@ -103,9 +114,10 @@
 					complete: function(response) {
 						//docoutput.html(response.responseText);//update element with received data
                         fd.html(response.responseText);
-						formDoc.resetForm();  
+						formDoc.resetForm();
 						submitDoc.removeAttr('disabled');
-						docprogressbox.hide(); 
+						docprogressbox.hide();
+						formDoc.hide();
                         formdocf.show();
                         //$('#title').val(docoutput + $('#title').val().replace("placeholder", docoutput));
 					}
@@ -240,7 +252,7 @@ $(document).ready(function(){
 
   </head>
   <body>
-  {% block header %}  {% include 'docs/header.html' %} {% endblock %}
+  {% block header %} {% include 'docs/header.html' %} {% endblock %}
 
   <div class="container-fluid">
     <div class="row-fluid">
