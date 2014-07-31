@@ -20,35 +20,84 @@ $(window).scroll(function() {
 
 
 $(function() {
+
+       /* NEW */
+
+        /*var fdu = $('#form_doc_upload');
+
+        var message = '';
+
+        var options = {
+            type: fdu.attr('method'),
+            url: fdu.attr('action'),
+            error: function(response) {
+                message = '<span class="error">We\'re sorry, but something went wrong. Retry.</span>';
+                $('.preview').html(message);
+                $('doc_file_name').val('');
+            },
+            success: function(response) {
+                message = '<span class="' + response.status + ' ' + response.result + '</span> ';
+                message = ( response.status == 'success' ) ? message + response.fileLink : message;
+                $('.preview').html(message);
+                $('doc_file_name').val('');
+            }
+        };
+        $(fdu).ajaxSubmit(options);*/
+
+       /* ENDNEW */
+
+
+
+
+      
+
         var fdu = $('#form_doc_upload');
 
-        $("#id_doc_file_name").change(function(){
-            var fileName = $(this).val();
+        $(fdu).submit(function(e) {
+
+            var formData = new FormData($(this)[0]);
+            
             $.ajax({
                 type: fdu.attr('method'),
                 url: fdu.attr('action'),
-                data: fdu.serialize(),
-                context: this,
+                datatype: 'json',
+                //data: fdu.serialize(),
+                data: formData,
+                async: false,
+                //mimeType: "multipart/form-data",
+                contentType: false,
+                //context: this,
                 cache: false,
-                success: function(data){
-                    $(".preview").html(data);
+                processData: false,
+                success: function(response){
+                       //$(".preview").html(data + textStatus + jqXHR);
+                      $(".preview").html(response.result +'  '+ '<br/> File: '+ response.dfilename);
                 },
-                error: function(data) {
-                    var ermsg = "Can't upload the file: "+ fileName+"<br/>Something went wrong!"
-                    $(".preview").html(ermsg);
+                error: function(jqXHR, textStatus, errorThrown) {
+                      //var ermsg = "Can't upload the file: "+ response.state +"<br/>Something went wrong!"
+                      var ermsg = "Server Error!";
+                      $(".preview").html(ermsg);
                 }
-            });
+                
+           });
 
+            //e.unbind();
+            e.preventDefault();
 
-            /*if(fileName) {
+           /*
+            if(fileName) {
                 alert(fileName + " was selected");
             } else {
                 alert("no files selected");
             }*/
 
-            return false;
+            //return false;
+
 
          });
+
+
+
 
 
 

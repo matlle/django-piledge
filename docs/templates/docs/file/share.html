@@ -11,7 +11,7 @@
 </ul>
     
      
-     <form action="{% url 'docs:create_doc_thumbnail' %}" method="post" width="400px;" id="form_doc_upload" {% if form.is_multipart %} enctype="multipart/form-data" {% endif %}>
+     <form action="{% url 'docs:create_doc_thumbnail' %}" method="post" width="400px;" id="form_doc_upload" enctype="multipart/form-data">
          {% csrf_token %}
     
           <!--<form id="formDoc" method="post" enctype="multipart/form-data" action="processd.php" style="margin-bottom: 150px; margin-top: -50px; width: 550px;">
@@ -42,9 +42,8 @@
             </div>
             <span style="color: red;">{{ field.errors }}</span>
             {{ form.doc_file_name }}<br/>
-            {{ form.doc_title }}
         </div>
-        <!-- <p><input type="submit" value="Upload" /></p> -->
+        <p><input type="submit" value="Upload" /></p>
    
 
 </form>

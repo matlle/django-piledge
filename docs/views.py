@@ -1,5 +1,6 @@
 import datetime, random, sha
-import django.utils.simplejson as json
+import  django.utils.simplejson as json
+from django.core import serializers
 from django.http import Http404
 from django.core.mail import send_mail
 from django.shortcuts import render_to_response, redirect, render, get_object_or_404
@@ -12,6 +13,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from forms import DocForm, CustomUserCreationForm
+import subprocess
 
 from docs.models import Doc
 
@@ -74,29 +76,63 @@ def update_progress_direct(request, message):
 def upload_doc(request):
     request.upload_handlers.insert(0, ProgressBarUploadHandler())
     return _upload_file_view(request)
- 
+
+
 
 def create_doc_thumbnail(request):
+    """response_data = {}
     if request.method == 'POST' and request.is_ajax():
-        from wand.image import Image
-        form = DocForm(request.POST)
-        titleD = request.FILE['doc_file_name']
-        msg = "Ajax works!"
-        """with Image(filename=doc_name[0]) as doc_thumb:
-            doc_thumb.save(filename="/temp.jpg")
-        with Image(filename="/temp.jpg") as doc_thumb:
-            doc_thumb.resize(200, 100)
-            doc_thumb.save(filename="/thumbnail_resize.jpg")
-        """
-    return HttpResponse(titleD)
+        #form = DocForm(request.POST, request.FILES)
+        if form.is_valid():
+            doc = Doc(
+                     doc_file_name=request.FILES['doc_file_name'].name,
+                     doc_title=request.POST['doc_title'],
+                     doc_description=request.POST['doc_description'])
+            doc.save()
+        msg = "Hello, world"
+
+            
+        response_data['status'] = "success"
+        response_data['result'] = "Your file has been uploaded!"
+        #response_data['file_link'] = "/%s" % request.FILES['doc_file_name']
+
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
+    
+    response_data['status'] = "error"
+    response_data['result'] = "We're sorry, but something went wrong. Please be sure that your file respects the upload conditions."
+
+    return HttpResponse(json.dumps(response_data), content_type="application/json")"""
+
+    response_data = {}
+    if request.method == 'POST' and request.is_ajax():
+        #from wand.image import Image
+        f = request.FILES['doc_file_name']
+        with open('uploads/%s' % request.FILES['doc_file_name'], 'wb+') as dest:
+            for chunk in f.chunks():
+                dest.write(chunk)
+        response_data['state'] = "success"
+        response_data['result'] = "Successesfull, file uploaded with ajax!"
+        #response_data['dtitle'] = request.POST['doc_title']
+        #response_data['ddescription'] = request.POST['doc_description']
+        #response_data['dfilename'] = request.FILES['doc_file_name'].name
+        
+        #response.write(serializers.serialize("json", response_data))
+        #with Image(filename=response_data['dfilename']) as doc_thumb:
+        #    doc_thumb.save(filename="uploads/temp.jpg")
+        #with Image(filename="uploads/temp.jpg") as doc_thumb:
+        #    doc_thumb.resize(200, 100)
+        #    doc_thumb.save(filename="uploads/thumbnail_resize.jpg")
+       
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
 
 """ ========================= User Process ============================ """
 
 
 def register(request, template_name="docs/authors/signup.html"):
-    redirect_at_url = reverse('docs:index')
+    redirect_to_url = reverse('docs:index')
     if request.user.is_authenticated():
-        return HttpResponseRedirect(redirect_at_url)
+        return HttpResponseRedirect(redirect_to_url)
     if request.method == 'POST':
         postdata = request.POST.copy()
         form = CustomUserCreationForm(request.POST)
@@ -107,7 +143,7 @@ def register(request, template_name="docs/authors/signup.html"):
             new_user = authenticate(username=ue, password=pw)
             if new_user and new_user.is_active:
                 login(request, new_user)
-                return HttpResponseRedirect(redirect_at_url)
+                return HttpResponseRedirect(redirect_to_url)
             
     else:
         form = CustomUserCreationForm()
