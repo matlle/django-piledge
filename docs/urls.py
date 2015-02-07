@@ -4,6 +4,7 @@ from django.conf import settings
 
 from docs import views
 
+
 urlpatterns = patterns('',
 
     url(r'^$', views.IndexView.as_view(), name='index'),

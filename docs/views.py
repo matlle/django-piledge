@@ -114,7 +114,7 @@ def create_doc_thumbnail(request):
         response_data['result'] = "Successesfull, file uploaded with ajax!"
         #response_data['dtitle'] = request.POST['doc_title']
         #response_data['ddescription'] = request.POST['doc_description']
-        #response_data['dfilename'] = request.FILES['doc_file_name'].name
+        response_data['dfilename'] = request.FILES['doc_file_name'].name
         
         #response.write(serializers.serialize("json", response_data))
         #with Image(filename=response_data['dfilename']) as doc_thumb:

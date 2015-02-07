@@ -51,7 +51,7 @@ $(function() {
 
       
 
-        var fdu = $('#form_doc_upload');
+      /*  var fdu = $('#form_doc_upload');
 
         $(fdu).submit(function(e) {
 
@@ -84,17 +84,27 @@ $(function() {
             //e.unbind();
             e.preventDefault();
 
-           /*
-            if(fileName) {
-                alert(fileName + " was selected");
-            } else {
-                alert("no files selected");
-            }*/
-
             //return false;
 
-
          });
+          
+        */
+          
+          /*
+           $('#id_doc_file_name').change(function() {
+               var fileName = $('#id_doc_file_name').val();
+            
+               if(fileName) {
+                $('#id_doc_title').val(fileName);
+               }
+
+            });
+           */
+
+
+         
+         
+          
 
 
 

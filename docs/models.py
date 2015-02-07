@@ -11,7 +11,7 @@ import subprocess, uuid
 class Doc(models.Model):
     doc_id = models.AutoField(primary_key=True)
     author = models.ForeignKey(User, editable=False)
-    doc_title = models.CharField(max_length=100)
+    doc_title = models.CharField(max_length=300)
     doc_description = models.TextField()
     doc_created_at = models.DateTimeField('Createa at', auto_now_add=True)
     doc_file_name = models.FileField(upload_to="uploads/docs/pdf", max_length=1024)

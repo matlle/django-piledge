@@ -1,52 +1,65 @@
 {% extends "docs/layout.html" %}
 
 {% block form_field %}
-        
-    <ul class="nav nav-pills">
+   
+   <div>
+   
+    <ul class="nav nav-pills" style="height: 20px;">
   <li class="active">
     <a href="#">Upload a document</a>
   </li>    
   <li><a href="#">Write a full document</a></li>
   <li><a href="#">Write a topic</a></li>
 </ul>
-    
+  
+  </div>
      
-     <form action="{% url 'docs:create_doc_thumbnail' %}" method="post" width="400px;" id="form_doc_upload" enctype="multipart/form-data">
-         {% csrf_token %}
-    
-          <!--<form id="formDoc" method="post" enctype="multipart/form-data" action="processd.php" style="margin-bottom: 150px; margin-top: -50px; width: 550px;">
-        Choose a document: &nbsp;  
-        <input type="file" name="docFile" />
-        <button type="submit" class="btn" name="submitDoc" id="submitDoc">Upload</button>
+     
 
-        <div id="docprogressbox"><div id="docprogressbar"></div ><div id="docstatustxt">0%</div ></div>
-                <div id="docoutput"></div> 
-    </form>
-    <div id="ermsg"></div> 
-    <div id="docoutput" style="float: left; margin-left: 260px; margin-top: -100px; width: 152px; height: 202px;">
-       <img src="Public/img/default.png" style="width: 152px; height: 202px;"> 
-    </div> 
+          
+         
+         <form action="{% url 'docs:upload' %}" method="post" style="width: 400px; margin-left: -200px;" class="form-horizontal" id="form_doc_upload" enctype="multipart/form-data">
+             {% csrf_token %}
 
-   <div class="span6 fd">
-       <div></div>
-    {# {% include 'file/form.html' %} #}
-      
-      {# {% if formshr %} {{ formshr|raw }} {% endif %} #}
+             <div style="width: 800px; margin-left: 20px;">
+                 <h6>Upload a document and share it with the world</h6><hr/>
+             </div>
 
-    </div>  
-    -->
+             <div>
 
+             <div class="control-group"> 
+                 <div style="color: red; margin-left: 200px;">{{ form.doc_file_name.errors }}</div>
+                 <label class="control-label" for="id_doc_file_name">Select a document: </label>
+                 <div class="controls">
+                     <input type="file" id="id_doc_file_name" name="doc_file_name" placeholder="Email">
+                 </div>
+             </div>
 
-        <div class="fieldWrapper">
-            <div class="preview">
-            </div>
-            <span style="color: red;">{{ field.errors }}</span>
-            {{ form.doc_file_name }}<br/>
-        </div>
-        <p><input type="submit" value="Upload" /></p>
-   
+             <div class="control-group">
+                 <div style="color: red; margin-left: 200px;">{{ form.doc_title.errors }}</div>
+                 <label class="control-label" for="id_doc_title">Title: </label>
+                 <div class="controls">
+                     <input type="text" maxlength="300" id="id_doc_title" name="doc_title" style="width: 500px;" placeholder="Title">
+                 </div>
+             </div>
 
-</form>
+             <div class="control-group">
+                 <div style="color: red; margin-left: 200px;">{{ form.doc_description.errors }}</div>
+                 <label class="control-label" for="inputPassword">Description: </label>
+                 <div class="controls">
+                     <textarea id="id_doc_description" name="doc_description" style="width: 500px; height: 100px;" placeholder="Description"></textarea>
+                 </div>
+             </div>
+
+             <div class="control-group">
+                 <div class="controls"> 
+                     <button type="submit" class="btn btn-primary" style="float: left;">Upload now >></button>
+                 </div>
+             </div>
+             
+             </div>
+
+         </form>
 
 
 {% endblock %}
