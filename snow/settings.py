@@ -72,9 +72,9 @@ WSGI_APPLICATION = 'snow.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'snow',
-        'USER': 'matlle',
-        'PASSWORD': 'azerty141206',
+        'NAME': 'yourdatabasename',
+        'USER': 'youruser',
+        'PASSWORD': 'yourpassword',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
